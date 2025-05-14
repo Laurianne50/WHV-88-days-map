@@ -1,0 +1,1 @@
+Aim of the code: create a map of Australian cities in which WHV can work towards their 88 days

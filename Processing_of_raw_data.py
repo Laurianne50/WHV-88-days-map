@@ -9,7 +9,7 @@ Relevant data are tables 1 to 6
 Data was collected on April 14, 2025
 '''
 
-raw_gov_website = pd.read_csv('C:/Users/Proprietaire/Desktop/Code/Australia_map/Code/Raw_data.txt', sep='\t')
+raw_gov_website = pd.read_csv('Raw_data.txt', sep='\t')
 
 ''' Several types of data in table: 
 - Type 1: 'All postcodes in ACT are eligible' --> in that case, post codes have to be retrieved manually for each state
@@ -33,7 +33,7 @@ table_titles_state = pd.DataFrame(dictionnary_states)
 raw_gov_website_All = pd.merge(raw_gov_website_All, table_titles_state, on="State/Territory")
 
 '''Australian Postcodes are retrieved from https://github.com/matthewproctor/australianpostcodes/tree/master'''
-australian_postcodes_file = pd.read_csv('C:/Users/Proprietaire/Desktop/Code/Australia_map/Code/australian_postcodes.csv', 
+australian_postcodes_file = pd.read_csv('australian_postcodes.csv', 
                                         sep=',',
                                         dtype={'postcode': str})
 
@@ -100,4 +100,4 @@ dictionnary_job_types = {
 table_job_types = pd.DataFrame(dictionnary_job_types)
 data = pd.merge(data, table_job_types, on="Title").drop_duplicates()
 
-data.to_csv('C:/Users/Proprietaire/Desktop/Code/Australia_map/Code/Data_postcode_whv.csv', index=False)  
+data.to_csv('Data_postcode_whv.csv', index=False)  

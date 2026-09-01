@@ -6,16 +6,17 @@ import pandas as pd
 Data are manually extracted from the Australian GOV website 
 (https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-417/specified-work)
 Relevant data are tables 1 to 6
-Data was collected on April 14, 2025
+Data was first collected on April 14th, 2025 (2025_Raw_data.txt)
+Data was updated on September 1st, 2026 (2026_Raw_data.txt)
 '''
-
-raw_gov_website = pd.read_csv('Raw_data.txt', sep='\t')
+year = '2026'
+raw_gov_website = pd.read_csv(f'{year}_Raw_data.txt', sep='\t')
 
 ''' Several types of data in table: 
 - Type 1: 'All postcodes in ACT are eligible' --> in that case, post codes have to be retrieved manually for each state
 - Type 2: '2224 to 2234' --> in that case, post codes have to be completed
 - Type 3: '2083, 2172, 2173, 2178'
-WARNING: Post codes at the frontier between two states can overlap (ex: 0872 is found in both SA and NT)
+WARNING: Post codes at the frontier between several states can overlap (ex: 0872 is found in WA, SA and NT)
 '''
 
 # Retrieved Type 1 data
@@ -32,7 +33,7 @@ dictionnary_states = {
 table_titles_state = pd.DataFrame(dictionnary_states)
 raw_gov_website_All = pd.merge(raw_gov_website_All, table_titles_state, on="State/Territory")
 
-'''Australian Postcodes are retrieved from https://github.com/matthewproctor/australianpostcodes/tree/master'''
+#Australian Postcodes are retrieved from https://github.com/matthewproctor/australianpostcodes/tree/master
 australian_postcodes_file = pd.read_csv('australian_postcodes.csv', 
                                         sep=',',
                                         dtype={'postcode': str})
@@ -79,6 +80,9 @@ raw_to_3 = raw_to_3.explode('Postcode').drop([0,1,'index'], axis=1)
 cleaned_data = pd.concat([raw_to_add_back,raw_to_3, raw_gov_website_All_2])\
     .reset_index().drop(['index'], axis=1)
 
+# Fill postcode starting with zero (such as 0872)
+cleaned_data['Postcode'] = cleaned_data['Postcode'].astype(str).str.zfill(4) 
+
 # Homogenize Tables Titles
 dictionnary_tablesTitles_gov_website = {
     "Table number": [1, 2, 3, 4, 5, 6],
@@ -98,6 +102,6 @@ dictionnary_job_types = {
               "Natural disaster declared areas"]
 }
 table_job_types = pd.DataFrame(dictionnary_job_types)
-data = pd.merge(data, table_job_types, on="Title").drop_duplicates()
+data = pd.merge(data, table_job_types, on="Title")
 
-data.to_csv('Data_postcode_whv.csv', index=False)  
+data.to_csv(f'{year}_Data_postcode_whv.csv', index=False)  

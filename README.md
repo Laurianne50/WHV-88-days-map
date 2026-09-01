@@ -2,7 +2,7 @@ Aim of the code: create a map of Australian cities in which  Working Holiday Vis
 
 Context: In Australia, Working Holiday Visa holders need to work 88 days during their first year to be able to renew their visa towards a second year. Work need to be undertaken in specific geographical areas and fields of work. Explanations are provided on the website of the Australian Government [here](https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/work-holiday-417/specified-work) and the map generated in this project is based on these information.  
 
-The map is directly accessible in your browser using [this link](https://laurianne50.github.io/WHV-88-days-map/map_whv.html?fbclid=IwY2xjawLTQXNleHRuA2FlbQIxMQABHuxUXGTzMmsBmvUeKr2KUeiNu5M7LkBBG5MA1OVvTXPVd5pEZfMeOsRHoXDP_aem_Fec7aUCdjMmjd_XoTYEzqA)
+The map is directly accessible in your browser using [this link](https://laurianne50.github.io/WHV-88-days-map/2026_map_whv.html)
 
 README is in progress
 
